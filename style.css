@@ -1,0 +1,14 @@
+body {
+    background: black;
+}
+
+#canvas__main {
+    position: absolute;
+    top: 50%;
+    left: 50%;   
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 600px;
+    background: rgb(99, 108, 104);
+    font-family: 'MedievalSharp', cursive;
+}
