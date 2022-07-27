@@ -2,6 +2,45 @@ body {
     background: black;
 }
 
+
+#box {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    margin-top: 10%;
+    margin-left: 60%;
+    gap: 0.5rem;
+ 
+}
+
+#btnNext {
+    height: 2rem;
+    width: auto;
+    border-radius: 0.5rem;
+    background-color: rgb(48, 40, 80);
+    color: rgb(197, 149, 46);
+    font-size: 1.4rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;  
+    z-index: 10;
+}
+
+#btnRestart {
+    height: 2rem;
+    width: auto;
+    border-radius: 0.5rem;
+    background-color: rgb(48, 40, 80);
+    color: rgb(197, 149, 46);
+    font-size: 1.4rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;  
+    z-index: 10;
+}
+
 #canvas__main {
     position: absolute;
     top: 50%;
@@ -11,4 +50,5 @@ body {
     height: 600px;
     background: rgb(99, 108, 104);
     font-family: 'MedievalSharp', cursive;
+    z-index: 9;
 }
