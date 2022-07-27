@@ -16,7 +16,7 @@ const cellSize = 100;
 const cellGap = 3;
 let level = 1;
 let maxLevel = 20;
-let enemiesInterval = 800 - (level * 20);
+let enemiesInterval = 1000;
 let frame = 0;
 let numberOfResources = 300;
 let gameOver = false;
@@ -43,7 +43,6 @@ function restartGame(type){
     resources.length = 0;
 
     level += type;
-    enemiesInterval = 800 - (level*20);
     frame = 0;
     numberOfResources = 300;
     gameOver = false;
@@ -511,7 +510,10 @@ function handleEnemies(){
 
         enemyPosition.push(verticalPosition);
 
-        if (enemiesInterval > 100) {enemiesInterval -= 20};
+        if (enemiesInterval > 100) {enemiesInterval -= (20*level)
+        } else if (enemiesInterval <100)
+            {enemiesInterval = 100};
+
         console.log(enemyPosition)
     }
 }
