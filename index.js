@@ -43,6 +43,7 @@ function restartGame(type){
     resources.length = 0;
 
     level += type;
+    enemiesInterval = 1000;
     frame = 0;
     numberOfResources = 300;
     gameOver = false;
