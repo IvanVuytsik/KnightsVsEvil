@@ -48,7 +48,7 @@ function restartGame(type){
     gameOver = false;
     gameWon = false;
     score = 0;
-    winningScore = 500 + (level*100);
+    winningScore = 600 + (level*100);
 
     createGrid();
 }
