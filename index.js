@@ -4,13 +4,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = 900;
 canvas.height = 600;
 
-
-function drawBG() {
-  const background = new Image();
-  background.src = './assets/images/bg.png';
-  ctx.drawImage(background, 0, 60);
-}
- 
+const background = new Image();
+background.src = './assets/images/bg.png';
 
 const cellSize = 100;
 const cellGap = 3;
@@ -115,7 +110,6 @@ function createGrid(){
     }
 }
 
-
 createGrid();
 
 //-------------------------------------------
@@ -130,15 +124,14 @@ function handleGameGrid(){
 const projectileTypes = [];
 const proj_0 = new Image();
 proj_0.src = './assets/images/projectiles/proj_0.png';
-projectileTypes.push(proj_0);
 
 const proj_1 = new Image();
 proj_1.src = './assets/images/projectiles/proj_1.png';
-projectileTypes.push(proj_1);
-
+ 
 const proj_2 = new Image();
 proj_2.src = './assets/images/projectiles/proj_2.png';
-projectileTypes.push(proj_2);
+
+projectileTypes.push(proj_0, proj_1, proj_2);
 
 //--------------------------------------------
 
@@ -169,7 +162,6 @@ class Projectile {
 
 
 //-------------------------
-
 function handleProjectiles(){
     for (let i = 0; i < projectiles.length; i++){
         projectiles[i].update();
@@ -348,8 +340,8 @@ const card_2 = {
     height: 85,
     colorStroke: 'black'
 }
-//------------------------------------------------------------------
 
+//------------------------------------------------------------------
 function manageDefenders(){
     ctx.linewidth = 1;
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
@@ -396,8 +388,6 @@ function manageDefenders(){
     ctx.strokeRect(card_2.x, card_2.y, card_2.width, card_2.height)
     ctx.drawImage(defenderTypes[2], 0, 0, 64, 64, 160, 5, 85, 85);
 }
-
-
 
 
 //-------------------------------enemy------------------------------
@@ -458,7 +448,7 @@ class Enemy {
     draw(){
         // ctx.fillStyle = 'red';
         // ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.fillStyle = 'darkred';
+        ctx.fillStyle = 'red';
         ctx.font = '20px MedievalSharp';
         ctx.fillText(Math.floor(this.health), this.x, (this.y+20));
         //img, sx, sy, sw, sh, dx, dy, dw, dh
@@ -474,8 +464,6 @@ class Enemy {
 
 // enemyTypes.push(raider, gladiator);
  
- 
-
 //-------------------------------------------
 function handleEnemies(){
     for (let i = 0; i < enemies.length; i++){
@@ -542,6 +530,7 @@ fruit_5.src = './assets/images/collectables/fruit_5.png';
 
 const fruit_6 = new Image();
 fruit_6.src = './assets/images/collectables/fruit_6.png';
+
 fruitTypes.push(fruit_0,fruit_1,fruit_2,fruit_3,fruit_4, fruit_5, fruit_6);
 
 class Resource {
@@ -611,9 +600,7 @@ function handleGameStatus(){
         ctx.fillText("Your score is: " + score, 100, 340);
 
         gameWon = true;
-    }
-
-     
+    }   
 }
  
 //--------------------------floating message-------------------------
@@ -676,7 +663,7 @@ canvas.addEventListener('click', function(){
         defenders.push(new Defender(gridPositionX, gridPositionY, 100, "ranged", 1));
         numberOfResources -= 200;
     } else if (selectedUnit === 2 && numberOfResources >= 120){
-        defenders.push(new Defender(gridPositionX, gridPositionY, 200, "melee", 1));
+        defenders.push(new Defender(gridPositionX, gridPositionY, 250, "melee", 1));
         numberOfResources -= 120;
     } else {
         floatingMessages.push(new floatingMessage('Not enough essence!', mouse.x, mouse.y, 20, 'blue'));
@@ -686,10 +673,10 @@ canvas.addEventListener('click', function(){
 
 //-----------------------------collisions-----------------------------
 function collision(first, second){
-    if (    !(first.x > second.x + second.width ||
-             first.x + first.width < second.x  ||  
-             first.y > second.y + second.height  || 
-             first.y + first.height < second.y)
+    if (    !(first.x >= second.x + second.width ||
+             first.x + first.width <= second.x  ||  
+             first.y >= second.y + second.height  || 
+             first.y + first.height <= second.y)
     ) {
         return true;
     }    
@@ -711,8 +698,8 @@ function debug(data){
 function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#354259';
-    drawBG();
-    
+    ctx.drawImage(background, 0, 60);
+
     // console.log(enemiesInterval)
     ctx.fillRect(0, 0, controlsBar.width, controlsBar.height);
     handleGameGrid();
@@ -732,8 +719,15 @@ function animate(){
         document.getElementById("btnNext").style.display = "none";
     }
 
+
+    if(gameOver){
+        document.getElementById("btnRestart").style.display = "none";
+    } else {
+        document.getElementById("btnRestart").style.display = "flex";
+    }
+
     // console.log(gameWon)
-    if (! gameOver) requestAnimationFrame(animate);
+    if (! gameOver) {requestAnimationFrame(animate)};
 }
  
 animate();

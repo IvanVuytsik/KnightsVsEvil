@@ -1,5 +1,6 @@
 body {
-    background: black;
+    background: black; 
+    font-family: 'MedievalSharp', cursive;
 }
 
 
@@ -25,6 +26,7 @@ body {
     align-items: center;
     justify-content: center;  
     z-index: 10;
+    cursor: pointer;
 }
 
 #btnRestart {
@@ -39,6 +41,7 @@ body {
     align-items: center;
     justify-content: center;  
     z-index: 10;
+    cursor: pointer;
 }
 
 #canvas__main {
@@ -49,6 +52,5 @@ body {
     width: 900px;
     height: 600px;
     background: rgb(99, 108, 104);
-    font-family: 'MedievalSharp', cursive;
     z-index: 9;
 }
